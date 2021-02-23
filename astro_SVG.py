@@ -15,9 +15,17 @@ from xml.dom.minidom import parseString
 
 
 #calculation and svg drawing class
-class ChartSvgInstance:
+class MakeInstance:
+    """ 
+    Creates the instance that can genearte the chart with the
+    function makeSVG().
+    Args: First kerykeion object,
+    Chart type (Natal, Transit, Composite, Default: Type="Natal"),
+    second kerykeion object (Not required if type is Natal)
 
-    def __init__(self, first_obj, chart_type="Transit", second_obj=None):
+    """
+
+    def __init__(self, first_obj, chart_type="Natal", second_obj=None):
 
         # Directories:
         DATADIR               = os.path.dirname(__file__)
@@ -1337,7 +1345,7 @@ if __name__ == "__main__":
     first = kr.Calculator("Jack", 1990, 6, 15, 13, 00, "Montichiari")
     second = kr.Calculator("Jane", 1991, 6, 11, 21, 00, "Cremona")
 
-    name = ChartSvgInstance(first, chart_type="Transit", second_obj=second)
+    name = MakeInstance(first, chart_type="Transit", second_obj=second)
     name.output_directory = "/Users/giacomobattaglia/desktop"
     name.makeSVG()
     #print(name.aspects_list)
