@@ -3,7 +3,7 @@
 
 
 #basics
-import astrochart_svg.chart_settings as chart_settings
+import astrochart_svg.settings as chart_settings
 import math, os.path, datetime, json, pytz
 import kerykeion as kr
 #template processing
