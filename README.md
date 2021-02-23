@@ -9,7 +9,7 @@ it's very easy to use.
 >>> pip3 install astro_svg
 
 #Import:
->>> import AstroChartsSVG as as
+>>> import astrochart_svg as as
 
 # Make the instance:
 >>> kanye = as.MakeInstance("Kanye", 1977, 6, 8, 8, 45, "Atlanta", type="Natal")
