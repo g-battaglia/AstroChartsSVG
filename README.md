@@ -36,7 +36,7 @@ SVG generated successfully!
  >>> name.makeSVG()
 
 ```
-![alt text](https://raw.githubusercontent.com/g-battaglia/astrochart_SVG/master/astrochart_SVG/sample.svg)
+![alt text](https://raw.githubusercontent.com/g-battaglia/astrochart_SVG/master/sample.svg)
 
 
 ## Documentation
