@@ -23,9 +23,18 @@ it's very easy to use.
 
 SVG generated successfully!
 
+![alt text](https://raw.githubusercontent.com/g-battaglia/birthchartSVG/master/birthchartSVG/template/sample.svg)
+
+>>> first = kr.Calculator("Jack", 1990, 6, 15, 13, 00, "Montichiari")
+>>> second = kr.Calculator("Jane", 1991, 6, 11, 21, 00, "Cremona")
+
+ >>> name = MakeInstance(first, chart_type="Transit", second_obj=second)
+ >>> name.output_directory = "/Users/giacomobattaglia/desktop"
+ >>> name.makeSVG()
+
 ```
 
-![alt text](https://raw.githubusercontent.com/g-battaglia/birthchartSVG/master/birthchartSVG/template/sample.svg)
+
 
 ## Documentation
 
