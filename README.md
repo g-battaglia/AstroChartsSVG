@@ -32,7 +32,6 @@ SVG generated successfully!
 >>> second = kr.Calculator("Jane", 1991, 6, 11, 21, 00, "Cremona")
 
  >>> name = MakeInstance(first, chart_type="Transit", second_obj=second)
- >>> name.output_directory = "/Users/giacomobattaglia/desktop"
  >>> name.makeSVG()
 
 ```
