@@ -1,1 +1,1 @@
-from astrochart_svg import MakeInstance
+from astrochart_svg.astrochart_svg import MakeInstance
