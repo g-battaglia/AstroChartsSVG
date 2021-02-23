@@ -22,8 +22,11 @@ it's very easy to use.
 
 
 SVG generated successfully!
+```
 
 ![alt text](https://raw.githubusercontent.com/g-battaglia/birthchartSVG/master/birthchartSVG/template/sample.svg)
+
+```python
 
 >>> first = kr.Calculator("Jack", 1990, 6, 15, 13, 00, "Montichiari")
 >>> second = kr.Calculator("Jane", 1991, 6, 11, 21, 00, "Cremona")
@@ -33,7 +36,7 @@ SVG generated successfully!
  >>> name.makeSVG()
 
 ```
-
+https://raw.githubusercontent.com/g-battaglia/astrochart_SVG/master/astrochart_SVG/sample.svg)
 
 
 ## Documentation
