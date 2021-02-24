@@ -3,7 +3,9 @@
 
 
 #basics
+#import settings as chart_settings
 import astrochart_svg.settings as chart_settings
+
 import math, os.path, datetime, json, pytz
 import kerykeion as kr
 #template processing
@@ -677,8 +679,14 @@ class MakeInstance:
                     t_linecolor = self.colors['houses_transit_line']            
                 xtext = self.sliceToX( 0 , (r-8) , t_text_offset ) + 8
                 ytext = self.sliceToY( 0 , (r-8) , t_text_offset ) + 8
-                path = path + '<text style="fill: #00f; fill-opacity: .4; font-size: 14px"><tspan x="'+str(xtext-3)+'" y="'+str(ytext+3)+'">'+str(i+1)+'</tspan></text>\n'
-                path = path + '<line x1="'+str(t_x1)+'" y1="'+str(t_y1)+'" x2="'+str(t_x2)+'" y2="'+str(t_y2)+'" style="stroke: '+t_linecolor+'; stroke-width: 2px; stroke-opacity:.3;"/>\n'                
+                
+                if self.type == "Transit":
+                    path = path + '<text style="fill: #00f; fill-opacity: 0; font-size: 14px"><tspan x="'+str(xtext-3)+'" y="'+str(ytext+3)+'">'+str(i+1)+'</tspan></text>\n'
+                    path = path + '<line x1="'+str(t_x1)+'" y1="'+str(t_y1)+'" x2="'+str(t_x2)+'" y2="'+str(t_y2)+'" style="stroke: '+t_linecolor+'; stroke-width: 2px; stroke-opacity:0;"/>\n'                
+                
+                else:
+                    path = path + '<text style="fill: #00f; fill-opacity: .4; font-size: 14px"><tspan x="'+str(xtext-3)+'" y="'+str(ytext+3)+'">'+str(i+1)+'</tspan></text>\n'
+                    path = path + '<line x1="'+str(t_x1)+'" y1="'+str(t_y1)+'" x2="'+str(t_x2)+'" y2="'+str(t_y2)+'" style="stroke: '+t_linecolor+'; stroke-width: 2px; stroke-opacity:.3;"/>\n'                
                 
             #if transit            
             if self.type == "Transit" or self.type == "Composite":
@@ -1346,6 +1354,6 @@ if __name__ == "__main__":
     second = kr.Calculator("Jane", 1991, 6, 11, 21, 00, "Cremona")
 
     name = MakeInstance(first, chart_type="Transit", second_obj=second)
-    name.output_directory = "/Users/giacomobattaglia/desktop"
+    name.output_directory = os.path.expanduser("~")
     name.makeSVG()
     #print(name.aspects_list)
