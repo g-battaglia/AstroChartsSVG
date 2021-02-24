@@ -879,11 +879,16 @@ class MakeInstance:
             #output planet            
             output = output + '<g transform="translate(-'+str(12*scale)+',-'+str(12*scale)+')"><g transform="scale('+str(scale)+')"><use x="' + str(planet_x*(1/scale)) + '" y="' + str(planet_y*(1/scale)) + '" xlink:href="#' + self.planets_asp[i]['name'] + '" /></g></g>\n'
             
+            
         #make transit degut and display planets
         if self.type == "Transit" or self.type == "Composite":
             group_offset={}
             t_planets_degut={}
-            for i in range(len(self.planets_asp)):
+            if self.type == "Transit":
+                list_range = len(self.planets_asp)-4
+            else:
+                list_range = len(self.planets_asp)
+            for i in range(list_range):
                 group_offset[i]=0
                 if self.planets_asp[i]['visible'] == 1:
                     t_planets_degut[self.t_planets_degree_ut[i]]=i
