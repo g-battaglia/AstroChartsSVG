@@ -307,11 +307,11 @@ planets = [
     "element_points": 10,
     "zodiac_relation": "7",
     "label": "Pluto",
-    "label_short": "pluto"
+    "label_short": "Pluto"
   },
   {
     "id": 10,
-    "name": "mean node",
+    "name": "Mean_Node",
     "color": "#4c1541",
     "visible": 0,
     "element_points": 20,
@@ -321,17 +321,17 @@ planets = [
   },
   {
     "id": 11,
-    "name": "true node",
+    "name": "True_Node",
     "color": "#4c1541",
     "visible": 0,
     "element_points": 0,
     "zodiac_relation": "-1",
-    "label": "?",
-    "label_short": "?"
+    "label": "True Node",
+    "label_short": "True Node"
   },
   {
     "id": 12,
-    "name": "Asc",
+    "name": "1",
     "color": "orange",
     "visible": 1,
     "element_points": 40,
@@ -341,7 +341,7 @@ planets = [
   },
   {
     "id": 13,
-    "name": "Mc",
+    "name": "10",
     "color": "#FF0000",
     "visible": 1,
     "element_points": 20,
@@ -351,7 +351,7 @@ planets = [
   },
   {
     "id": 14,
-    "name": "Dsc",
+    "name": "7",
     "color": "#0000FF",
     "visible": 0,
     "element_points": 0,
@@ -361,7 +361,7 @@ planets = [
   },
   {
     "id": 15,
-    "name": "Ic",
+    "name": "4",
     "color": "#000000",
     "visible": 0,
     "element_points": 0,

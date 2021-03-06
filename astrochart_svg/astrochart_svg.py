@@ -1037,14 +1037,14 @@ class MakeInstance:
             conj[i]={}
             #skip some points
             n = self.planets_asp[i]['name']
-            if n == 'earth' or n == 'true node' or n == 'osc. apogee' or n == 'intp. apogee' or n == 'intp. perigee':
+            if n == 'earth' or n == 'True_Node' or n == 'osc. apogee' or n == 'intp. apogee' or n == 'intp. perigee':
                 continue
             if n == 'Dsc' or n == 'Ic':
                 continue
             for j in range(len(self.planets_asp)):
                 #skip some points
                 n = self.planets_asp[j]['name']
-                if n == 'earth' or n == 'true node' or n == 'osc. apogee' or n == 'intp. apogee' or n == 'intp. perigee':
+                if n == 'earth' or n == 'True_Node' or n == 'osc. apogee' or n == 'intp. apogee' or n == 'intp. perigee':
                     continue    
                 if n == 'Dsc' or n == 'Ic':
                     continue
