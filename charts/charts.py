@@ -1213,6 +1213,10 @@ class MakeInstance:
     # Aspect and aspect grid functions for transit type charts.
     
     def makeAspectsTransit( self , r , ar ):
+
+        self.kr_list = kr.utilities.CompositeAspects(self.user, self.t_user).get_aspects()
+
+        
         out = ""
         self.aspects_list = []
         for i in range(len(self.planets_asp)):
@@ -1241,6 +1245,8 @@ class MakeInstance:
                                 self.aspects_list[-1]['p2'] = x
                                 self.aspects_list[-1]['aid'] = z
                                 self.aspects_list[-1]['diff'] = diff
+        
+
                                 
         return out
     
@@ -1352,7 +1358,8 @@ if __name__ == "__main__":
     first = kr.Calculator("Jack", 1990, 6, 15, 13, 00, "Montichiari")
     second = kr.Calculator("Jane", 1991, 6, 11, 21, 00, "Cremona")
 
-    name = MakeInstance(first, chart_type="Natal", second_obj=second)
+    name = MakeInstance(first, chart_type="Composite", second_obj=second)
     name.output_directory = os.path.expanduser("~")
     name.makeSVG()
-    #print(name.aspects_list)
+    print(len(name.aspects_list))
+    print(len(name.kr_list))
