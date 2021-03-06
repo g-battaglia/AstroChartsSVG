@@ -4,7 +4,7 @@
 
 #basics
 #import settings as chart_settings
-import settings as chart_settings
+import kerykeion.utilities.kr_settings as chart_settings
 
 import math, os.path, datetime, json, pytz
 import kerykeion as kr
@@ -1162,27 +1162,8 @@ class MakeInstance:
         #return out
         return ''
     
-    # def makeAspects( self , r , ar ):
-    #     out=""
-    #     for i in range(len(self.planets_asp)):
-    #         start = self.planets_degree_ut[i]
-    #         for x in range(i):
-    #             end=self.planets_degree_ut[x]
-    #             diff = float(self.degreeDiff(start,end))
-    #             #loop variable_orbs
-    #             if (self.planets_asp[i]['visible'] == 1) and (self.planets_asp[x]['visible'] == 1):
-    #                 for z in range(len(self.aspects)):
-    #                     variable_orb = float(self.aspects[z]['orb'])
-    #                     axes = [12, 13, 14, 15]
-    #                     if self.planets_asp[i]['id'] in axes  or self.planets_asp[x]['id'] in axes:
-    #                         # self.orb 
-    #                         variable_orb = 1
-    #                     if    ( float(self.aspects[z]['degree']) - variable_orb)  <= diff <= ( float(self.aspects[z]['degree']) + variable_orb):
-    #                         #check if we want to display this aspect
-    #                         if self.aspects[z]['visible'] == 1:                    
-    #                             out = out + self.drawAspect(r, ar, self.planets_degree_ut[i], self.planets_degree_ut[x], self.colors["aspect_%s" %(self.aspects[z]['degree'])] )
-        
-    #     return out
+
+
 
     def makeAspects( self , r , ar ):
         out=""
@@ -1260,41 +1241,6 @@ class MakeInstance:
         out += '</g>'
         return out
 
-    def makeAspectGrid_old( self , r ):
-        out=""
-        style='stroke:%s; stroke-width: 1px; stroke-opacity:.6; fill:none' % (self.colors['paper_0'])
-        xindent=380
-        yindent=468
-        box=14
-        revr = list(range(len(self.planets_asp)))
-        revr.reverse()
-        for a in revr:
-            if self.planets_asp[a]['visible'] == 1:
-                start=self.planets_degree_ut[a]
-                #first planet 
-                out = out + '<rect x="'+str(xindent)+'" y="'+str(yindent)+'" width="'+str(box)+'" height="'+str(box)+'" style="'+style+'"/>\n'
-                out = out + '<use transform="scale(0.4)" x="'+str((xindent+2)*2.5)+'" y="'+str((yindent+1)*2.5)+'" xlink:href="#'+self.planets_asp[a]['name']+'" />\n'
-                xindent = xindent + box
-                yindent = yindent - box
-                revr2=list(range(a))
-                revr2.reverse()
-                xorb=xindent
-                yorb=yindent + box
-                for b in revr2:
-                    if self.planets_asp[b]['visible'] == 1:
-                        end = self.planets_degree_ut[b]
-                        diff = self.degreeDiff(start,end)
-                        out = out + '<rect x="'+str(xorb)+'" y="'+str(yorb)+'" width="'+str(box)+'" height="'+str(box)+'" style="'+style+'"/>\n'
-                        xorb = xorb+box
-                        for z in range(len(self.aspects)):
-                            variable_orb = float(self.aspects[z]['orb'])
-                            axes = [12, 13, 14, 15]
-                            if self.planets_asp[a]['id'] in axes  or self.planets_asp[b]['id'] in axes:
-                            # self.orb 
-                                variable_orb = 1
-                            if    (float(self.aspects[z]['degree']) - variable_orb) <= diff <= (float(self.aspects[z]['degree']) + variable_orb) and self.aspects[z]['visible'] == 1:
-                                    out = out + '<use  x="'+str(xorb-box+1)+'" y="'+str(yorb+1)+'" xlink:href="#orb'+str(self.aspects[z]['degree'])+'" />\n'
-        return out
 
     def makeAspectGrid(self, r):
         self.aspect_instance = kr.utilities.NatalAspects(self.user)
