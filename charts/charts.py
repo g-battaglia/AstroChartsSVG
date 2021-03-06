@@ -1168,7 +1168,7 @@ class MakeInstance:
     def makeAspects( self , r , ar ):
         out=""
         self.aspect_instance = kr.utilities.NatalAspects(self.user)
-        self.aspect_instance.filter_aspects()
+        self.aspect_instance.get_aspects()
         for element in self.aspect_instance.aspects:
             out = out + self.drawAspect(r, ar, element['p1_abs_pos'], element['p2_abs_pos'], self.colors[f"aspect_{element['aspect_degrees']}"] )
 
@@ -1243,7 +1243,7 @@ class MakeInstance:
 
     def makeAspectGrid(self, r):
         self.aspect_instance = kr.utilities.NatalAspects(self.user)
-        self.aspect_instance.filter_aspects()
+        self.aspect_instance.get_aspects()
         for a in self.aspect_instance.aspects:
             print(a['p1_name'], a['p2_name'], a['orbit'])
 
