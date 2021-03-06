@@ -1179,9 +1179,6 @@ class MakeInstance:
 
     def makeAspectGrid(self, r):
 
-        for a in self.natal_aspects_list:
-            print(a['p1_name'], a['p2_name'], a['orbit'])
-
         out=""
         style='stroke:%s; stroke-width: 1px; stroke-opacity:.6; fill:none' % (self.colors['paper_0'])
         xindent=380
