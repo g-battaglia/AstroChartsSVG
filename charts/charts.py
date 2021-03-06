@@ -440,10 +440,9 @@ class MakeInstance:
         td['makeHousesGrid'] = self.makeHousesGrid()
         
         #read template
-        f = open(self.xml_svg)
-
-        template = Template(f.read()).substitute(td)
-        f.close()
+        with open(self.xml_svg, "r") as output_file:
+            f = open(self.xml_svg)
+            template = Template(f.read()).substitute(td)
         
 
         self.chartname = os.path.join(self.output_directory, f'{self.name}{self.type}Chart.svg')
@@ -1213,41 +1212,14 @@ class MakeInstance:
     # Aspect and aspect grid functions for transit type charts.
     
     def makeAspectsTransit( self , r , ar ):
-
-        self.kr_list = kr.utilities.CompositeAspects(self.user, self.t_user).get_aspects()
-
-        
         out = ""
-        self.aspects_list = []
-        for i in range(len(self.planets_asp)):
-            start = self.planets_degree_ut[i]
-            for x in range(i + 1):
-                end = self.t_planets_degree_ut[x]
-                diff = float(self.degreeDiff(start,end))
-                #loop variable_orbs
-                if (self.planets_asp[i]['visible'] == 1) and (self.planets_asp[x]['visible'] == 1):    
-                    for z in range(len(self.aspects)):
-                        #check for personal planets and determine variable_orb
-                        variable_orb = float(self.aspects[z]['orb'])
-                        axes = [12, 13, 14, 15]
-                        if self.planets_asp[i]['id'] in axes  or self.planets_asp[x]['id'] in axes:
-                        # self.orb 
-                            variable_orb = 0
-                        if self.planets_asp[i]['id'] == 12  and self.planets_asp[x]['id'] == 12:
-                            variable_orb = 5    
-                        if    ( float(self.aspects[z]['degree']) - variable_orb ) <= diff <= ( float(self.aspects[z]['degree']) + variable_orb ):
-                            if self.aspects[z]['visible'] == 1:
-                                out = out + self.drawAspect( r , ar , self.planets_degree_ut[i] , self.t_planets_degree_ut[x] , self.colors["aspect_%s" %(self.aspects[z]['degree'])] )        
-                            #aspect grid dictionary
-                            if self.aspects[z]['visible_grid'] == 1:
-                                self.aspects_list.append({})
-                                self.aspects_list[-1]['p1'] = i
-                                self.aspects_list[-1]['p2'] = x
-                                self.aspects_list[-1]['aid'] = z
-                                self.aspects_list[-1]['diff'] = diff
+
         
 
-                                
+        self.aspects_list = kr.utilities.CompositeAspects(self.user, self.t_user).get_aspects()
+        for element in self.aspects_list:
+            out = out + self.drawAspect(r, ar, element['p1_abs_pos'], element['p2_abs_pos'], self.colors[f"aspect_{element['aspect_degrees']}"] )
+                        
         return out
     
     def makeAspectTransitGrid( self , r ):
@@ -1362,4 +1334,4 @@ if __name__ == "__main__":
     name.output_directory = os.path.expanduser("~")
     name.makeSVG()
     print(len(name.aspects_list))
-    print(len(name.kr_list))
+    print(name.aspects)
