@@ -1169,8 +1169,7 @@ class MakeInstance:
         out=""
         self.aspect_instance = kr.utilities.NatalAspects(self.user)
         self.aspect_instance.filter_aspects()
-        for element in self.aspect_instance.aspects_list:
-            print(element)
+        for element in self.aspect_instance.aspects:
             out = out + self.drawAspect(r, ar, element['p1_abs_pos'], element['p2_abs_pos'], self.colors[f"aspect_{element['aspect_degrees']}"] )
 
         return out
@@ -1245,6 +1244,8 @@ class MakeInstance:
     def makeAspectGrid(self, r):
         self.aspect_instance = kr.utilities.NatalAspects(self.user)
         self.aspect_instance.filter_aspects()
+        for a in self.aspect_instance.aspects:
+            print(a['p1_name'], a['p2_name'], a['orbit'])
 
 
         out=""
@@ -1258,8 +1259,6 @@ class MakeInstance:
         for a in revr:
             counter += 1
             if self.planets_asp[a]['visible'] == 1:
-                #start=self.planets_degree_ut[a]
-                #first planet 
                 out = out + '<rect x="'+str(xindent)+'" y="'+str(yindent)+'" width="'+str(box)+'" height="'+str(box)+'" style="'+style+'"/>\n'
                 out = out + '<use transform="scale(0.4)" x="'+str((xindent+2)*2.5)+'" y="'+str((yindent+1)*2.5)+'" xlink:href="#'+self.planets_asp[a]['name']+'" />\n'
                 xindent = xindent + box
@@ -1270,14 +1269,9 @@ class MakeInstance:
                 yorb=yindent + box
                 for b in revr2:
                     if self.planets_asp[b]['visible'] == 1:
-                        #end = self.planets_degree_ut[b]
-                        #diff = self.degreeDiff(start,end)
                         out = out + '<rect x="'+str(xorb)+'" y="'+str(yorb)+'" width="'+str(box)+'" height="'+str(box)+'" style="'+style+'"/>\n'
                         xorb = xorb+box
-                        e = self.aspect_instance.aspects_list[counter]
-                        for element in self.aspect_instance.aspects_list:
-                            #print("___________________")
-                            #print(a, b)
+                        for element in self.aspect_instance.aspects:
                             if (element['p1'] == a and element['p2'] == b) or (element['p1'] == b and element['p2'] == a):
                                 out = out + '<use  x="'+str(xorb-box+1)+'" y="'+str(yorb+1)+'" xlink:href="#orb'+str(element['aspect_degrees'])+'" />\n'
 
