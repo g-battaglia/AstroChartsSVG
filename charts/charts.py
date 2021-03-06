@@ -102,7 +102,7 @@ class MakeInstance:
 
         if self.type == "Natal":
             natal_aspects_instance = kr.utilities.NatalAspects(self.user)
-            self.natal_aspects_list = natal_aspects_instance.get_aspects()
+            self.aspects_list = natal_aspects_instance.get_aspects()
             
 
         if self.type == "Transit" or self.type == "Composite":
@@ -1171,7 +1171,7 @@ class MakeInstance:
 
     def makeAspects( self , r , ar ):
         out=""
-        for element in self.natal_aspects_list:
+        for element in self.aspects_list:
             out = out + self.drawAspect(r, ar, element['p1_abs_pos'], element['p2_abs_pos'], self.colors[f"aspect_{element['aspect_degrees']}"] )
 
         return out
@@ -1201,7 +1201,7 @@ class MakeInstance:
                     if self.planets_asp[b]['visible'] == 1:
                         out = out + '<rect x="'+str(xorb)+'" y="'+str(yorb)+'" width="'+str(box)+'" height="'+str(box)+'" style="'+style+'"/>\n'
                         xorb = xorb+box
-                        for element in self.natal_aspects_list:
+                        for element in self.aspects_list:
                             if (element['p1'] == a and element['p2'] == b) or (element['p1'] == b and element['p2'] == a):
                                 out = out + '<use  x="'+str(xorb-box+1)+'" y="'+str(yorb+1)+'" xlink:href="#orb'+str(element['aspect_degrees'])+'" />\n'
 
@@ -1249,7 +1249,7 @@ class MakeInstance:
             #difference in degrees
             out += '<text y="8" x="45" style="fill:%s; font-size: 10px;">%s</text>' % (
                 self.colors['paper_0'],
-                self.dec2deg(self.aspects_list[i]['diff']) )
+                self.dec2deg(self.aspects_list[i]['orbit']) )
             #line
             out += '</g>'
             line = line + 14        
@@ -1327,11 +1327,10 @@ class MakeInstance:
 
 if __name__ == "__main__":
     
-    first = kr.Calculator("Jack", 1990, 6, 15, 13, 00, "Montichiari")
-    second = kr.Calculator("Jane", 1991, 6, 11, 21, 00, "Cremona")
+    second = kr.Calculator("Jack", 1990, 6, 15, 13, 00, "Montichiari")
+    first = kr.Calculator("Jane", 1991, 6, 11, 21, 00, "Cremona")
 
     name = MakeInstance(first, chart_type="Composite", second_obj=second)
     name.output_directory = os.path.expanduser("~")
     name.makeSVG()
-    print(len(name.aspects_list))
-    print(name.aspects)
+    print(name.aspects_list)
