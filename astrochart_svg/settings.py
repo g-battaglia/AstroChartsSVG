@@ -211,7 +211,7 @@ aspects = [
 planets = [
   {
     "id": 0,
-    "name": "sun",
+    "name": "Sun",
     "color": "#984b00",
     "visible": 1,
     "element_points": 40,
@@ -221,7 +221,7 @@ planets = [
   },
   {
     "id": 1,
-    "name": "moon",
+    "name": "Moon",
     "color": "#150052",
     "visible": 1,
     "element_points": 40,
@@ -231,7 +231,7 @@ planets = [
   },
   {
     "id": 2,
-    "name": "mercury",
+    "name": "Mercury",
     "color": "#520800",
     "visible": 1,
     "element_points": 15,
@@ -241,7 +241,7 @@ planets = [
   },
   {
     "id": 3,
-    "name": "venus",
+    "name": "Venus",
     "color": "#400052",
     "visible": 1,
     "element_points": 15,
@@ -251,7 +251,7 @@ planets = [
   },
   {
     "id": 4,
-    "name": "mars",
+    "name": "Mars",
     "color": "#540000",
     "visible": 1,
     "element_points": 15,
@@ -261,7 +261,7 @@ planets = [
   },
   {
     "id": 5,
-    "name": "jupiter",
+    "name": "Jupiter",
     "color": "#47133d",
     "visible": 1,
     "element_points": 10,
@@ -271,7 +271,7 @@ planets = [
   },
   {
     "id": 6,
-    "name": "saturn",
+    "name": "Saturn",
     "color": "#124500",
     "visible": 1,
     "element_points": 10,
@@ -281,7 +281,7 @@ planets = [
   },
   {
     "id": 7,
-    "name": "uranus",
+    "name": "Uranus",
     "color": "#6f0766",
     "visible": 1,
     "element_points": 10,
@@ -291,7 +291,7 @@ planets = [
   },
   {
     "id": 8,
-    "name": "neptune",
+    "name": "Neptune",
     "color": "#06537f",
     "visible": 1,
     "element_points": 10,
@@ -301,7 +301,7 @@ planets = [
   },
   {
     "id": 9,
-    "name": "pluto",
+    "name": "Pluto",
     "color": "#713f04",
     "visible": 0,
     "element_points": 10,

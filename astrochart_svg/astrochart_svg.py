@@ -4,7 +4,7 @@
 
 #basics
 #import settings as chart_settings
-import astrochart_svg.settings as chart_settings
+import settings as chart_settings
 
 import math, os.path, datetime, json, pytz
 import kerykeion as kr
