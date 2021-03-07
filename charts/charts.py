@@ -1230,8 +1230,18 @@ class MakeInstance:
         for i in range(len(self.aspects_list)):
             if i == 12:
                 nl = 100
-                if len(self.aspects_list) > 24:
-                    line = -1 * ( len(self.aspects_list) - 24) * 14
+                # if len(self.aspects_list) > 24:
+                #     line = -1 * ( len(self.aspects_list) - 24) * 14
+                # else:
+                #     line = 0
+
+                # temporary:
+                line = 0
+
+            if i == 24:
+                nl = 200
+                if len(self.aspects_list) > 36:
+                    line = -1 * ( len(self.aspects_list) - 36) * 14
                 else:
                     line = 0
             out += '<g transform="translate(%s,%s)">' % (nl,line)
@@ -1327,10 +1337,10 @@ class MakeInstance:
 
 if __name__ == "__main__":
     
-    first = kr.Calculator("Jack", 1990, 6, 15, 13, 00, "Montichiari")
-    second = kr.Calculator("Jane", 1991, 6, 11, 21, 00, "Cremona")
+    first = kr.Calculator("Jack", 1990, 6, 10, 13, 00, "Montichiari")
+    second = kr.Calculator("Jane", 1991, 6, 9, 21, 00, "Cremona")
 
     name = MakeInstance(first, chart_type="Composite", second_obj=second)
     name.output_directory = os.path.expanduser("~")
     name.makeSVG()
-    print(name.aspects_list)
+    print(len(name.aspects_list))
