@@ -1331,8 +1331,13 @@ class MakeInstance:
         # ----------
 
         if self.type == "Transit" or self.type == "Composite":
-            out = out + '<g transform="translate(380, -15)">'
-            out = out + f'<text text-anchor="end" style="fill:{self.colors["paper_0"]}; font-size: 14px;">{self.label["planets_and_house"]} {self.t_user.name}:</text>'
+            
+            if self.type == "Transit":
+                out = out + '<g transform="translate(320, -15)">'
+                out = out + f'<text text-anchor="end" style="fill:{self.colors["paper_0"]}; font-size: 14px;">{self.t_name}:</text>'
+            else:
+                out = out + '<g transform="translate(380, -15)">'
+                out = out + f'<text text-anchor="end" style="fill:{self.colors["paper_0"]}; font-size: 14px;">{self.label["planets_and_house"]} {self.t_user.name}:</text>'
             out = out + '</g>\n'
 
             t_li = 10
@@ -1391,7 +1396,7 @@ class MakeInstance:
 
         # ----------
 
-        if self.type == "Transit" or self.type == "Composite":
+        if self.type == "Composite":
             out += '<g transform="translate(840, -20)">'
             li = 10
             for i in range(12):
@@ -1420,7 +1425,7 @@ if __name__ == "__main__":
     first = kr.Calculator("Jack", 1990, 12, 10, 13, 00, "New York")
     second = kr.Calculator("Jane", 1991, 6, 9, 21, 00, "Tokio")
 
-    name = MakeInstance(first, chart_type="Composite", second_obj=second)
+    name = MakeInstance(first, chart_type="Transit", second_obj=second)
     name.output_directory = os.path.expanduser("~")
     name.makeSVG()
     print(len(name.aspects_list))
