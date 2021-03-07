@@ -282,7 +282,9 @@ class MakeInstance:
             #svgWidth=float(self.screen_width)-25.0
             rotate = "0"
             translate = "0"
-            viewbox = '0 0 772.2 546.0' #297mm * 2.6 + 210mm * 2.6
+            # Defoult:
+            # viewbox = '0 0 772.2 546.0' #297mm * 2.6 + 210mm * 2.6
+            viewbox = '0 0 1000 546.0'
         else:
             sizeX = 546.0
             sizeY = 772.2
@@ -1224,7 +1226,7 @@ class MakeInstance:
     
     def makeAspectTransitGrid( self , r ):
         out = '<g transform="translate(500,310)">'
-        out += '<text y="-15" x="0" style="fill:%s; font-size: 12px;">%s</text>\n' % (self.colors['paper_0'], (f"{self.label['aspects']}:"))
+        out += '<text y="-15" x="0" style="fill:%s; font-size: 14px;">%s</text>\n' % (self.colors['paper_0'], (f"{self.label['aspects']}:"))
         line = 0
         nl = 0
         for i in range(len(self.aspects_list)):
@@ -1240,8 +1242,16 @@ class MakeInstance:
 
             if i == 24:
                 nl = 200
-                if len(self.aspects_list) > 36:
-                    line = -1 * ( len(self.aspects_list) - 36) * 14
+                # if len(self.aspects_list) > 36:
+                #     line = -1 * ( len(self.aspects_list) - 36) * 14
+                # else:
+                #     line = 0
+                line = 0
+            
+            if i == 36:
+                nl = 300
+                if len(self.aspects_list) > 48:
+                    line = -1 * ( len(self.aspects_list) - 48) * 14
                 else:
                     line = 0
             out += '<g transform="translate(%s,%s)">' % (nl,line)
@@ -1281,11 +1291,19 @@ class MakeInstance:
         return out
         
     def makePlanetGrid( self ):
-        out = '<g transform="translate(510,-40)">'
+        out = '<g transform="translate(500,-20)">'
+        
         #loop over all planets
         li = 10
         offset = 0
+
+        out = out + '<g transform="translate(140, -15)">'
+        out = out + f'<text text-anchor="end" style="fill:{self.colors["paper_0"]}; font-size: 14px;">{self.label["planets_and_house"]} {self.name}:</text>'
+        out = out + '</g>\n'
+
         for i in range(len(self.planets_asp)):
+            
+            # Guarda qui !!
             if i == 27:
                 li = 10
                 offset = -120
@@ -1309,11 +1327,54 @@ class MakeInstance:
                 #offset between lines
                 li = li + 14    
         
+        
+        # ----------
+
+        if self.type == "Transit" or self.type == "Composite":
+            out = out + '<g transform="translate(380, -15)">'
+            out = out + f'<text text-anchor="end" style="fill:{self.colors["paper_0"]}; font-size: 14px;">{self.label["planets_and_house"]} {self.t_user.name}:</text>'
+            out = out + '</g>\n'
+
+            t_li = 10
+            t_offset = 250
+
+            for i in range(len(self.planets_asp)):
+            
+                # Guarda qui !!
+                if i == 27:
+                    t_li = 10
+                    t_offset = -120
+                if self.planets_asp[i]['visible'] == 1:
+                    #start of line                
+                    out = out + '<g transform="translate(%s,%s)">' % (t_offset, t_li)
+                    #planet text
+                    out = out + '<text text-anchor="end" style="fill:%s; font-size: 10px;">%s</text>' % (self.colors['paper_0'],self.planets_asp[i]['label'])
+                    #planet symbol
+                    out = out + '<g transform="translate(5,-8)"><use transform="scale(0.4)" xlink:href="#'+self.planets_asp[i]['name']+'" /></g>'                                
+                    #planet degree                
+                    out = out + '<text text-anchor="start" x="19" style="fill:%s; font-size: 10px;">%s</text>' % (self.colors['paper_0'],self.dec2deg(self.t_planets_degree[i]))
+                    #zodiac
+                    out = out + '<g transform="translate(60,-8)"><use transform="scale(0.3)" xlink:href="#'+self.zodiac[self.t_planets_sign[i]]+'" /></g>'   ##             
+                    #planet retrograde
+                    if self.t_planets_retrograde[i]:
+                        out = out + '<g transform="translate(74,-6)"><use transform="scale(.5)" xlink:href="#retrograde" /></g>'                
+
+                    #end of line
+                    out = out + '</g>\n'
+                    #offset between lines
+                    t_li = t_li + 14    
+        
+        
+
+        # ----------
+
         out = out + '</g>\n'
+
         return out
     
     def makeHousesGrid( self ):
-        out = '<g transform="translate(610,-40)">'
+
+        out = '<g transform="translate(600,-20)">'
         li=10
         for i in range(12):
             if i < 9:
@@ -1327,6 +1388,25 @@ class MakeInstance:
             out += '</g>\n'
             li = li + 14
         out += '</g>\n'
+
+        # ----------
+
+        if self.type == "Transit" or self.type == "Composite":
+            out += '<g transform="translate(840, -20)">'
+            li = 10
+            for i in range(12):
+                if i < 9:
+                    cusp = '&#160;&#160;'+str(i+1)
+                else:
+                    cusp = str(i+1)
+                out += '<g transform="translate(0,'+str(li)+')">'
+                out += '<text text-anchor="end" x="40" style="fill:%s; font-size: 10px;">%s %s:</text>' % (self.colors['paper_0'],self.label['cusp'],cusp)            
+                out += '<g transform="translate(40,-8)"><use transform="scale(0.3)" xlink:href="#'+self.zodiac[self.t_houses_sign[i]]+'" /></g>'
+                out += '<text x="53" style="fill:%s; font-size: 10px;"> %s</text>' % (self.colors['paper_0'],self.dec2deg(self.t_houses_degree[i]))
+                out += '</g>\n'
+                li = li + 14
+            out += '</g>\n'
+
         return out
 
 
@@ -1337,8 +1417,8 @@ class MakeInstance:
 
 if __name__ == "__main__":
     
-    first = kr.Calculator("Jack", 1990, 6, 10, 13, 00, "Montichiari")
-    second = kr.Calculator("Jane", 1991, 6, 9, 21, 00, "Cremona")
+    first = kr.Calculator("Jack", 1990, 12, 10, 13, 00, "New York")
+    second = kr.Calculator("Jane", 1991, 6, 9, 21, 00, "Tokio")
 
     name = MakeInstance(first, chart_type="Composite", second_obj=second)
     name.output_directory = os.path.expanduser("~")
