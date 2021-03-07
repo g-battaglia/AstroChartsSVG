@@ -1237,14 +1237,14 @@ class MakeInstance:
             out += '<g transform="translate(%s,%s)">' % (nl,line)
             #first planet symbol
             out += '<use transform="scale(0.4)" x="0" y="3" xlink:href="#%s" />\n' % (
-                self.planets_asp[self.aspects_list[i]['p2']]['name'])
+                self.planets_asp[self.aspects_list[i]['p1']]['name'])
             #aspect symbol
             out += '<use  x="15" y="0" xlink:href="#orb%s" />\n' % (
                 self.aspects[self.aspects_list[i]['aid']]['degree'])
             #second planet symbol
             out += '<g transform="translate(30,0)">'
             out += '<use transform="scale(0.4)" x="0" y="3" xlink:href="#%s" />\n' % (
-                self.planets_asp[self.aspects_list[i]['p1']]['name'])
+                self.planets_asp[self.aspects_list[i]['p2']]['name'])
             out += '</g>'
             #difference in degrees
             out += '<text y="8" x="45" style="fill:%s; font-size: 10px;">%s</text>' % (
@@ -1327,8 +1327,8 @@ class MakeInstance:
 
 if __name__ == "__main__":
     
-    second = kr.Calculator("Jack", 1990, 6, 15, 13, 00, "Montichiari")
-    first = kr.Calculator("Jane", 1991, 6, 11, 21, 00, "Cremona")
+    first = kr.Calculator("Jack", 1990, 6, 15, 13, 00, "Montichiari")
+    second = kr.Calculator("Jane", 1991, 6, 11, 21, 00, "Cremona")
 
     name = MakeInstance(first, chart_type="Composite", second_obj=second)
     name.output_directory = os.path.expanduser("~")
