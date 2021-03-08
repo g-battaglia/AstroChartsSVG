@@ -205,7 +205,7 @@ class MakeInstance:
             self.t_geolon    = self.geolon
             self.t_geolat    = self.geolat
             self.t_altitude  = self.altitude
-            self.t_name      = ("Here and Now")
+            self.t_name      = self.label['transit_name']
             self.t_year      = dt_utc.year
             self.t_month     = dt_utc.month
             self.t_day       = dt_utc.day
@@ -342,8 +342,11 @@ class MakeInstance:
         else:
             td['stringTitle'] = self.name
         
-        # Tipo di carta    
-        td['stringName'] = f"{self.label['type']}: {self.charttype}"
+        # Tipo di carta  
+        if self.type == "Composite" or self.name == "Transit":  
+            td['stringName'] = f"{self.name}:"
+        else:
+            td['stringName'] = "Info:"
         
         #bottom left
 
@@ -405,11 +408,19 @@ class MakeInstance:
         else:
             td['stringLocation']=self.location
             
-        td['stringDateTime']= str(self.user.year)+'-%(#1)02d-%(#2)02d %(#3)02d:%(#4)02d:%(#5)02d' % {'#1':self.user.month,'#2':self.user.day,'#3':self.user.hours,'#4':self.user.minuts,'#5':00} + self.decTzStr(self.timezone)
-        td['stringLat']="%s: %s" %(self.label['latitude'],self.lat2str(self.geolat))
-        td['stringLon']="%s: %s" %(self.label['longitude'],self.lon2str(self.geolon))
-        
-        td['stringPosition']= "Detail"
+        #td['stringDateTime']= str(self.user.year)+'-%(#1)02d-%(#2)02d %(#3)02d:%(#4)02d:%(#5)02d' % {'#1':self.user.month,'#2':self.user.day,'#3':self.user.hours,'#4':self.user.minuts,'#5':00} + self.decTzStr(self.timezone)
+        td['stringDateTime']= f'{self.user.year}-{self.user.month}-{self.user.day} {self.user.hours:02d}:{self.user.minuts:02d}'
+
+        if self.type == "Composite":
+            td['stringLat']= f'{self.t_user.name}: '
+            td['stringLon']= self.t_user.city
+            td['stringPosition']= f'{self.t_user.year}-{self.t_user.month}-{self.t_user.day} {self.t_user.hours:02d}:{self.t_user.minuts:02d}'
+
+
+        else:
+            td['stringLat']="%s: %s" %(self.label['latitude'],self.lat2str(self.geolat))
+            td['stringLon']="%s: %s" %(self.label['longitude'],self.lon2str(self.geolon))
+            td['stringPosition']= f"{self.label['type']}: {self.charttype}"
 
         #paper_color_X
         td['paper_color_0']=self.colors["paper_0"]
@@ -1422,10 +1433,13 @@ class MakeInstance:
 
 if __name__ == "__main__":
     
-    first = kr.Calculator("Jack", 1990, 12, 10, 13, 00, "New York")
-    second = kr.Calculator("Jane", 1991, 6, 9, 21, 00, "Tokio")
+    first = kr.Calculator("Jack", 1990, 6, 15, 15, 15, "Roma")
+    second = kr.Calculator("Jane", 1991, 10, 25, 21, 00, "Roma")
 
-    name = MakeInstance(first, chart_type="Transit", second_obj=second)
+    name = MakeInstance(first, chart_type="Composite", second_obj=second)
     name.output_directory = os.path.expanduser("~")
     name.makeSVG()
     print(len(name.aspects_list))
+    kr.print_settings_path()
+
+
