@@ -1425,14 +1425,14 @@ class MakeInstance:
 
         return out
                                                                                                                
-        def set_output_directory(self, dir_path):
-            """
-            Sets the output direcotry and returns it's path.
-            """
-            self.output_directory = dir_path
-            dir_string = f"Output direcotry set to: {self.output_directory}"
-            return (print(dir_string))                                                                                                                
-                                                                                                               
+    def set_output_directory(self, dir_path):
+        """
+        Sets the output direcotry and returns it's path.
+        """
+        self.output_directory = dir_path
+        dir_string = f"Output direcotry set to: {self.output_directory}"
+        return (print(dir_string))                                                                                                                
+                                                                                                            
                                                                                                                
 
 
