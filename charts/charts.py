@@ -1431,7 +1431,7 @@ class MakeInstance:
             """
             self.output_directory = dir_path
             dir_string = f"Output direcotry set to: {self.output_directory}"
-            return(print(dir_string))                                                                                                                
+            return (print(dir_string))                                                                                                                
                                                                                                                
                                                                                                                
 
